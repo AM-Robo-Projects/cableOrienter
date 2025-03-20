@@ -21,7 +21,8 @@ class CableType(Enum):
     YELLOW2T2 = 10
 
 
-def calculate_angle_correction(corners: List[Tuple[int, int]], use_min=True) -> float:
+def calculate_angle_correction(corners: Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]],
+                               use_min=True) -> float:
     """
     Calculate the minimum angle correction based on the four corners of the cable shape.
 
@@ -43,8 +44,7 @@ def calculate_angle_correction(corners: List[Tuple[int, int]], use_min=True) -> 
     return np.deg2rad(smaller)
 
 
-def get_approx_polly(mask: np.ndarray) -> Optional[
-    Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]]:
+def get_approx_polly(mask: np.ndarray) -> Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
     """
     Approximate the convex hull of a mask and return the four corner points of the cable shape.
 
@@ -79,7 +79,7 @@ def get_approx_polly(mask: np.ndarray) -> Optional[
 
         return top_left, top_right, bottom_left, bottom_right
     else:
-        return None
+        raise ValueError("No valid cable shape detected in the image")
 
 
 class CableOrienter:
