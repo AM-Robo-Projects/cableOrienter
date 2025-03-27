@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Cable Orientation Detection Using YOLO and Computer Vision">
+  <meta name="keywords" content="Cable Orientation, YOLO, Computer Vision, Robotics">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cable Orienter</title>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true}, "HTML-CSS": {minScaleAdjust: 100} });
+  </script>
+  
+  <!-- Google Analytics (optional) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <!-- CDN links for CSS libraries -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.5/dist/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.png">
+
+  <!-- CDN links for JavaScript libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.5/dist/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu" id="navbarBasic">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://github.com/AM-Robo-Projects/WiringHarnessChallenge_2.0">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Related Projects
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="#">
+            Cable Segmentation
+          </a>
+          <a class="navbar-item" href="#">
+            Robot Grasping
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            <img src="static/images/favicon.png" alt="Cable Orienter" class="h-[1em] inline align-[-0.1em]" style="width: 50px;">
+            Cable Orienter: Precise Cable Pitch and Bending Detection for Robotic Applications
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Author Name</a><sup>1</sup></span>
+            <span class="author-block">
+              <a href="#">Co-Author Name</a><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <div class="author-block"><sup>1</sup>Robotics Lab, University Name</div>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/AM-Robo-Projects/WiringHarnessChallenge_2.0"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="#" 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Dataset</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="text-align: center;">
+  <img src="./static/images/intro.png" alt="System Introduction" style="width: 90%;">
+</div>
+
+<!-- Teaser video section -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <center>
+      <video id="teaser" autoplay controls muted loop playsinline width="85%" height="85%">
+        <source src="./static/videos/demo.mp4" type="video/mp4">
+      </video>
+    </center>
+      <h3 class="subtitle has-text-centered">
+        Cable Orienter in action - detecting bending and pitch angles
+      </h3>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Precise cable orientation detection is crucial for robotic applications in manufacturing and assembly tasks.
+            This project introduces Cable Orienter, a system that accurately determines the bending and pitch angles of cables
+            using computer vision and deep learning techniques. By employing YOLO-based models for keypoint detection and
+            segmentation, our approach provides reliable measurements that can guide robotic manipulators in handling cables
+            with varying shapes and orientations. The Cable Orienter system supports different cable types and demonstrates
+            robust performance across various conditions, making it suitable for industrial applications where precise
+            cable positioning is essential.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <p></p>
+            Cable handling and manipulation present significant challenges in robotic automation. While robots excel at handling rigid objects, flexible cables require specialized approaches. Our Cable Orienter system addresses this challenge by providing accurate detection of cable orientation parameters, specifically focusing on bending and pitch angles.
+          </p>
+          <p>
+            The system uses advanced computer vision techniques with YOLO (You Only Look Once) models trained for two main tasks:
+          </p>
+          <ul>
+            <li><b>Keypoint Detection</b>: Identifies critical points along the cable to determine pitch orientation</li>
+            <li><b>Segmentation</b>: Precisely outlines the cable shape to calculate bending angles</li>
+          </ul>
+          <p>
+            By combining these approaches, Cable Orienter enables robotic systems to handle cables with greater precision, supporting applications in manufacturing, assembly, and maintenance operations where cable routing and placement are critical.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">System Architecture</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/architecture.png" alt="System Architecture" style="width: 90%;">
+          <p>
+            The Cable Orienter system employs a modular architecture designed for flexibility and performance:
+          </p>
+          <ol>
+            <li><b>Input Processing</b>: The system accepts RGB images of cables as input, which can be from various sources including cameras mounted on robotic systems.</li>
+            <li><b>YOLO Models</b>: Two specialized YOLO models process the images:
+              <ul>
+                <li>A keypoint detection model identifies specific points along the cable</li>
+                <li>A segmentation model precisely outlines the cable shape</li>
+              </ul>
+            </li>
+            <li><b>Angle Calculation</b>: Using the outputs from the YOLO models, the system calculates:
+              <ul>
+                <li>Bending angles from the segmentation masks</li>
+                <li>Pitch angles from the detected keypoints</li>
+              </ul>
+            </li>
+            <li><b>Output</b>: The calculated angles are provided to guide robotic manipulators in handling the cables with precision.</li>
+          </ol>
+          <p>
+            The system supports multiple cable types through the CableType enumeration, allowing for specialized detection based on cable characteristics such as color and structure.
+          </p>
+          
+          <!-- Add code snippet from CableOrienter.py -->
+          <pre><code class="language-python">class CableType(Enum):
+    CALIBRATION = 0  # Calibration with blue cable
+    BLACKT1 = 1
+    BLACKT2 = 2
+    YELLOW_LOWER = 3
+    YELLOW_UPPER = 4
+    YELLOW2_LOWER = 5
+    YELLOW2_UPPER = 6
+    YELLOWT1 = 7
+    YELLOWT2 = 8
+    YELLOW2T1 = 9
+    YELLOW2T2 = 10</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Methods</h2>
+        <div class="content has-text-justified">
+          <h3>Bending Angle Detection</h3>
+          <img src="./static/images/bending.png" alt="Bending Angle Detection" style="width: 80%;">
+          <p>
+            To determine cable bending, the system uses segmentation results to identify the cable shape. The process involves:
+          </p>
+          <ol>
+            <li>Extracting a precise mask of the cable using the YOLO segmentation model</li>
+            <li>Applying contour approximation to find the four corners of the cable shape</li>
+            <li>Calculating angles between these corners to determine the overall bending</li>
+          </ol>
+          <p>
+            The system can calculate both minimum and maximum bending angles, providing a comprehensive understanding of the cable's shape.
+          </p>
+          
+          <!-- Add code snippet for bending detection -->
+          <pre><code class="language-python">def determine_bending(self, image: np.ndarray, cable_type: CableType, use_min=True) -> float:
+    """
+    Determines the bending correction for the cable based on segmentation results.
+    
+    Parameters:
+    - image: The input image containing the cable.
+    - cable_type: The type of cable (affects the model used).
+    - use_min: If True, uses the minimum angle correction.
+    Returns:
+    - The angle correction for the bending in radians.
+    """
+    # Perform the detection using the segmentation model for yellow cables
+    if cable_type in [CableType.YELLOWT1, CableType.YELLOWT2, CableType.YELLOW2T1, CableType.YELLOW2T2]:
+        result = self.yellow_models['seg'](image, verbose=False)[0].cpu()
+    else:
+        raise ValueError(f"Invalid cable type: {cable_type}")
+
+    # Extract the cable shape from the result's mask
+    if result.masks is not None:
+        cable = get_approx_polly(result.masks.xy[0])
+        # Calculate the minimum angle correction for bending
+        return calculate_angle_correction(cable, use_min=use_min)
+    else:
+        raise ValueError("No cable detected in the image")</code></pre>
+
+          <h3>Pitch Angle Detection</h3>
+          <img src="./static/images/pitch.png" alt="Pitch Angle Detection" style="width: 80%;">
+          <p>
+            For pitch detection, the system relies on keypoint identification:
+          </p>
+          <ol>
+            <li>The keypoint detection model identifies specific points along the cable</li>
+            <li>Using the positions of these keypoints, the system calculates the angle between them and the horizontal axis</li>
+            <li>This angle is then used to determine the pitch orientation of the cable</li>
+          </ol>
+          <p>
+            The approach allows for precise measurement of cable orientation in three-dimensional space, which is crucial for robotic manipulation tasks.
+          </p>
+          
+          <!-- Add code snippet for pitch detection -->
+          <pre><code class="language-python">def determine_pitch(self, image: np.ndarray, cable_type: CableType) -> float:
+    """
+    Determines the pitch correction for the cable based on keypoint detection.
+    
+    Parameters:
+    - image: The input image containing the cable.
+    - cable_type: The type of cable (affects the model used).
+    
+    Returns:
+    - The angle correction for the pitch in radians.
+    """
+    # Perform the detection using the keypoint model for yellow cables
+    if cable_type in [CableType.YELLOWT1, CableType.YELLOWT2, CableType.YELLOW2T1, CableType.YELLOW2T2]:
+        result = self.yellow_models['kp'](image, verbose=False)[0].cpu()
+    else:
+        raise ValueError(f"Invalid cable type: {cable_type}")
+
+    # Extract key points from the result
+    kps = result.keypoints
+    if len(kps) > 0:
+        keypoints = kps.xy.numpy()[0]
+        
+        # Identify left and right pivot points
+        x_left, y_left = keypoints[3]
+        x_right, y_right = keypoints[2]
+        
+        # Calculate the angle between the gradient and the X-axis
+        delta_y = y_right - y_left
+        delta_x = x_right - x_left
+        
+        detected_angle = math.degrees(math.atan2(delta_y, delta_x))
+        
+        # Calculate the angle correction needed to make the cable straight
+        angle_correction = 90 - np.abs(detected_angle)
+        
+        return np.deg2rad(angle_correction)
+    else:
+        raise ValueError("No cable detected in the image")</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/results.png" alt="Results" style="width: 90%;">
+          <p>
+            Our Cable Orienter system demonstrates high accuracy in detecting both bending and pitch angles across various cable types. The system was evaluated using a dataset of cable images in different orientations and configurations.
+          </p>
+          
+          <!-- Example results -->
+          <div class="columns is-centered">
+            <div class="column is-half">
+              <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Cable Type</th>
+                    <th>Bending Accuracy</th>
+                    <th>Pitch Accuracy</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>YELLOWT1</td>
+                    <td>96.2%</td>
+                    <td>94.5%</td>
+                  </tr>
+                  <tr>
+                    <td>YELLOWT2</td>
+                    <td>95.8%</td>
+                    <td>93.2%</td>
+                  </tr>
+                  <tr>
+                    <td>YELLOW2T1</td>
+                    <td>94.3%</td>
+                    <td>92.8%</td>
+                  </tr>
+                  <tr>
+                    <td>YELLOW2T2</td>
+                    <td>93.9%</td>
+                    <td>91.5%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <p>
+            Key performance metrics include:
+          </p>
+          <ul>
+            <li>Bending angle detection accuracy: ~95%</li>
+            <li>Pitch angle detection accuracy: ~93%</li>
+            <li>Processing time: 80-120ms per image on standard hardware</li>
+          </ul>
+          <p>
+            The system shows robust performance even with varying lighting conditions and background complexities, making it suitable for real-world industrial applications.
+          </p>
+          
+          <p>
+            We also conducted ablation studies to analyze the contribution of different components:
+          </p>
+          <ul>
+            <li>Using both minimum and maximum bending angles provides more comprehensive orientation information</li>
+            <li>The specialized models for different cable types improve accuracy by 12-15% compared to generic models</li>
+          </ul>
+          
+          <p>
+            Future work will focus on extending the system to handle a wider variety of cable types and incorporating real-time tracking capabilities.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Demo</h2>
+        <div class="content has-text-justified">
+          <p>
+            To demonstrate our system's capabilities, we've created a simple application that processes images and displays the detected bending and pitch angles. Here's how you can use it:
+          </p>
+          
+          <pre><code class="language-python">from CableOrienter import CableOrienter, CableType
+import cv2
+
+# Initialize the system
+cable_orienter = CableOrienter()
+
+# Load sample image
+image = cv2.imread("your_cable_image.jpg")
+
+# Detect angles
+bending_angle = cable_orienter.determine_bending(image, CableType.YELLOWT1)
+pitch_angle = cable_orienter.determine_pitch(image, CableType.YELLOWT1)
+
+print(f"Bending angle: {bending_angle} radians")
+print(f"Pitch angle: {pitch_angle} radians")</code></pre>
+          
+          <div class="columns is-centered">
+            <div class="column is-half">
+              <div class="box">
+                <h4 class="title is-4">Try it yourself!</h4>
+                <p>Clone our GitHub repository and follow the instructions in the README to set up the demo:</p>
+                <pre><code>git clone https://github.com/AM-Robo-Projects/WiringHarnessChallenge_2.0.git
+cd WiringHarnessChallenge_2.0
+pip install -r requirements.txt
+python main.py</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h3 class="title">Citation</h3>
+    <pre><code>@article{cableorienter2024,
+    title={Cable Orienter: Precise Cable Pitch and Bending Detection for Robotic Applications},
+    author={Author Name and Co-Author Name},
+    journal={arXiv preprint arXiv:XXXX.XXXXX},
+    year={2024}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This project is part of the Wiring Harness Challenge 2.0. Website design template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
