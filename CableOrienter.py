@@ -1,24 +1,16 @@
-from enum import Enum
-from ultralytics import YOLO
-import numpy as np
-import cv2
 import math
-from typing import Tuple, List, Optional
+import time
+from enum import Enum
+from typing import Tuple
+
+import cv2
+import numpy as np
+from ultralytics import YOLO
 
 
 # Enum class to define the different cable types
 class CableType(Enum):
-    CALIBRATION = 0  # Calibration with blue cable
-    BLACKT1 = 1
-    BLACKT2 = 2
-    YELLOW_LOWER = 3
-    YELLOW_UPPER = 4
-    YELLOW2_LOWER = 5
-    YELLOW2_UPPER = 6
-    YELLOWT1 = 7
-    YELLOWT2 = 8
-    YELLOW2T1 = 9
-    YELLOW2T2 = 10
+    YELLOW = 0
 
 
 def calculate_angle_correction(corners: Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]],
@@ -28,6 +20,7 @@ def calculate_angle_correction(corners: Tuple[Tuple[int, int], Tuple[int, int], 
 
     Parameters:
     - corners: List of 4 tuples representing the (x, y) coordinates of the corners.
+    - use_min: If True, returns the minimum angle; if False, returns the maximum angle.
 
     Returns:
     - The angle correction in radians.
@@ -39,9 +32,9 @@ def calculate_angle_correction(corners: Tuple[Tuple[int, int], Tuple[int, int], 
     angle_left = math.degrees(math.atan2(bottom_left[1] - top_left[1], bottom_left[0] - top_left[0]))
     angle_right = math.degrees(math.atan2(bottom_right[1] - top_right[1], bottom_right[0] - top_right[0]))
 
-    # Calculate the smaller angle difference and apply a correction factor
-    smaller = 90 - (min(angle_left, angle_right) if use_min else max(angle_left, angle_right))
-    return np.deg2rad(smaller)
+    # Calculate the angle difference and apply a correction factor
+    correction = 90 - (min(angle_left, angle_right) if use_min else max(angle_left, angle_right))
+    return np.deg2rad(correction)
 
 
 def get_approx_polly(mask: np.ndarray) -> Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
@@ -60,26 +53,43 @@ def get_approx_polly(mask: np.ndarray) -> Tuple[Tuple[int, int], Tuple[int, int]
     # Get the convex hull of the mask
     hull = cv2.convexHull(mask)
 
-    # Approximate the contour with 4 points using a precision epsilon value
-    epsilon = 0.02 * cv2.arcLength(hull, True)  # Adjust precision as needed
+    # Start with an initial epsilon value for approximation
+    epsilon = 0.02 * cv2.arcLength(hull, True)
     approx = cv2.approxPolyDP(hull, epsilon, True)
 
-    # Force the approximation to have exactly 4 points
-    if len(approx) > 4:
-        approx = cv2.approxPolyDP(hull, 0.05 * cv2.arcLength(hull, True), True)
+    # Try to get exactly 4 points using adaptive epsilon
+    iterations = 0
+    max_iterations = 10
+    
+    while len(approx) != 4 and iterations < max_iterations:
+        if len(approx) > 4:
+            epsilon *= 1.2  # Increase epsilon to get fewer points
+        else:
+            epsilon *= 0.8  # Decrease epsilon to get more points
+        
+        approx = cv2.approxPolyDP(hull, epsilon, True)
+        iterations += 1
+    
+    # Handle cases where we couldn't get exactly 4 points
+    if len(approx) != 4:
+        if len(approx) > 4:
+            # Use minimum area rectangle as fallback
+            rect = cv2.minAreaRect(hull)
+            approx = np.array(cv2.boxPoints(rect), dtype=np.int32)
+        else:
+            raise ValueError(f"Could not approximate to 4 points (got {len(approx)} points)")
 
-    # If the approximation has 4 points, sort them and return the corners
-    if len(approx) == 4:
-        approx = approx.reshape(4, 2)
-        sorted_pts = sorted(approx, key=lambda p: (p[1], p[0]))  # Sort by y first, then x
+    # Reshape and sort the points
+    approx = approx.reshape(4, 2)
+    
+    # Sort points by y-coordinate (top-to-bottom)
+    sorted_pts = sorted(approx, key=lambda p: (p[1], p[0]))
 
-        # Identify and sort the corners (top-left, top-right, bottom-left, bottom-right)
-        top_left, top_right = sorted(sorted_pts[:2], key=lambda p: p[0])  # Sort left-to-right
-        bottom_left, bottom_right = sorted(sorted_pts[2:], key=lambda p: p[0])
+    # Identify corners (top-left, top-right, bottom-left, bottom-right)
+    top_left, top_right = sorted(sorted_pts[:2], key=lambda p: p[0])
+    bottom_left, bottom_right = sorted(sorted_pts[2:], key=lambda p: p[0])
 
-        return top_left, top_right, bottom_left, bottom_right
-    else:
-        raise ValueError("No valid cable shape detected in the image")
+    return top_left, top_right, bottom_left, bottom_right
 
 
 class CableOrienter:
@@ -93,14 +103,40 @@ class CableOrienter:
         'seg': './models/yellow_seg.pt',  # Segmentation model path
     }
 
-    def __init__(self):
+    def __init__(self, show_progress=False):
         """
         Initializes the utility by loading the YOLO models for keypoints and segmentation.
+        
+        Parameters:
+        - show_progress: If True, displays a loading progress indicator
         """
-        self.yellow_models = {
-            'kp': YOLO(self.YELLOW_MODELS_PATH['kp']),
-            'seg': YOLO(self.YELLOW_MODELS_PATH['seg'])
-        }
+        self.yellow_models = {}
+        
+        try:
+            # Load keypoint model
+            if show_progress:
+                print("Loading keypoint model... ", end='', flush=True)
+                start_time = time.time()
+                
+            self.yellow_models['kp'] = YOLO(self.YELLOW_MODELS_PATH['kp'])
+            
+            if show_progress:
+                print(f"Done! ({time.time() - start_time:.2f}s)")
+                print("Loading segmentation model... ", end='', flush=True)
+                start_time = time.time()
+            
+            # Load segmentation model
+            self.yellow_models['seg'] = YOLO(self.YELLOW_MODELS_PATH['seg'])
+            
+            if show_progress:
+                print(f"Done! ({time.time() - start_time:.2f}s)")
+        
+        except Exception as e:
+            print(f"\nError loading models: {str(e)}")
+            print("Make sure the model files exist in the ./models/ directory:")
+            print(f"  - {self.YELLOW_MODELS_PATH['kp']}")
+            print(f"  - {self.YELLOW_MODELS_PATH['seg']}")
+            raise
 
     def determine_bending(self, image: np.ndarray, cable_type: CableType, use_min=True) -> float:
         """
@@ -110,19 +146,20 @@ class CableOrienter:
         - image: The input image containing the cable.
         - cable_type: The type of cable (affects the model used).
         - use_min: If True, uses the minimum angle correction.
+
         Returns:
         - The angle correction for the bending in radians.
         """
         # Perform the detection using the segmentation model for yellow cables
-        if cable_type in [CableType.YELLOWT1, CableType.YELLOWT2, CableType.YELLOW2T1, CableType.YELLOW2T2]:
+        if cable_type == CableType.YELLOW:
             result = self.yellow_models['seg'](image, verbose=False)[0].cpu()
         else:
-            raise ValueError(f"Invalid cable type: {cable_type}")
+            raise ValueError(f"Cable type {cable_type.name} is not currently supported")
 
         # Extract the cable shape from the result's mask
-        if result.masks is not None:
+        if result.masks is not None and len(result.masks.xy) > 0:
             cable = get_approx_polly(result.masks.xy[0])
-            # Calculate the minimum angle correction for bending
+            # Calculate the angle correction for bending
             return calculate_angle_correction(cable, use_min=use_min)
         else:
             raise ValueError("No cable detected in the image")
@@ -139,17 +176,16 @@ class CableOrienter:
         - The angle correction for the pitch in radians.
         """
         # Perform the detection using the keypoint model for yellow cables
-        if cable_type in [CableType.YELLOWT1, CableType.YELLOWT2, CableType.YELLOW2T1, CableType.YELLOW2T2]:
+        if cable_type == CableType.YELLOW:
             result = self.yellow_models['kp'](image, verbose=False)[0].cpu()
         else:
-            raise ValueError(f"Invalid cable type: {cable_type}")
+            raise ValueError(f"Cable type {cable_type.name} is not currently supported")
 
         # Extract key points from the result
         kps = result.keypoints
         if len(kps) > 0:
             keypoints = kps.xy.numpy()[0]
-
-            # Identify left and right pivot points
+                
             x_left, y_left = keypoints[3]
             x_right, y_right = keypoints[2]
 
@@ -164,4 +200,4 @@ class CableOrienter:
 
             return np.deg2rad(angle_correction)
         else:
-            raise ValueError("No cable detected in the image")
+            raise ValueError("No keypoints detected in the image")
