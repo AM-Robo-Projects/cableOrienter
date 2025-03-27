@@ -1,5 +1,6 @@
 body {
   font-family: 'Google Sans', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .publication-title {
@@ -85,7 +86,7 @@ body {
 
 .hero-body {
   padding-top: 2rem;
-  padding-bottom: 0rem;
+  padding-bottom: 1rem;
 }
 
 .hero.teaser {
@@ -167,4 +168,153 @@ pre {
   height: 100px;
   position: absolute;
   z-index: 10;
+}
+
+/* Responsive padding */
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.section {
+  padding: 2rem 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 1.5rem 1rem;
+  }
+  
+  .hero-body {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  
+  .title, .subtitle {
+    color: #ffffff;
+  }
+  
+  .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    color: #ffffff;
+  }
+  
+  .box {
+    background-color: #252525;
+    color: #e0e0e0;
+  }
+  
+  .footer {
+    background-color: #1a1a1a;
+    color: #cccccc;
+  }
+  
+  table.table {
+    background-color: #252525;
+    color: #ffffff; /* Changed from #e0e0e0 to make text more visible */
+  }
+  
+  table.table th {
+    color: #ffffff; /* Ensure headers are also bright white */
+  }
+  
+  table.table.is-striped tbody tr:not(.is-selected):nth-child(even) {
+    background-color: #2d2d2d;
+  }
+  
+  pre {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+  }
+  
+  .hero.teaser {
+    background-color: #1a1a1a;
+  }
+
+  a {
+    color: #61dafb;
+  }
+
+  a:hover {
+    color: #a5e9ff;
+  }
+}
+
+/* Better mobile layout for publication links */
+@media screen and (max-width: 600px) {
+  .publication-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .link-block {
+    margin: 0.3rem;
+  }
+}
+
+/* Better image handling on small screens */
+@media screen and (max-width: 768px) {
+  .section .content img {
+    width: 100%;
+  }
+}
+
+/* Make tables responsive */
+@media screen and (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+  }
+}
+
+/* Remove all hover effects from tables */
+.table.is-hoverable tbody tr:hover,
+.table.is-hoverable tbody tr:not(.is-selected):hover,
+.table tbody tr:hover,
+.table tr:hover,
+.table.is-striped tbody tr:not(.is-selected):nth-child(even):hover,
+.table.is-striped tbody tr:not(.is-selected):nth-child(odd):hover,
+.table.is-striped.is-hoverable tbody tr:not(.is-selected):nth-child(even):hover,
+.table.is-striped.is-hoverable tbody tr:not(.is-selected):nth-child(odd):hover {
+  background-color: inherit !important;
+}
+
+/* Completely disable hoverable behavior */
+.table.is-hoverable {
+  cursor: default;
+}
+
+.table.is-hoverable tbody tr,
+.table tbody tr {
+  transition: none !important;
+}
+
+/* Ensure that the hover color is removed from all tables */
+.table tr:hover td,
+.table.is-hoverable tr:hover td,
+.table.is-striped tr:hover td {
+  background-color: inherit !important;
+}
+
+/* Remove hover effect from tables - apply to both light and dark modes */
+.table.is-hoverable tbody tr:hover,
+.table.is-hoverable tbody tr:not(.is-selected):hover,
+.table.is-striped.is-hoverable tbody tr:not(.is-selected):nth-child(even):hover,
+.table.is-striped.is-hoverable tbody tr:not(.is-selected):nth-child(odd):hover {
+  background-color: transparent !important;
+}
+
+/* Override Bulma's is-hoverable class entirely */
+.table.is-hoverable {
+  cursor: default;
+}
+
+.table.is-hoverable tbody tr {
+  transition: none !important;
 }
