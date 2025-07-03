@@ -3,44 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Cable Orientation Detection Using YOLO and Computer Vision">
-  <meta name="keywords" content="Cable Orientation, YOLO, Computer Vision, Robotics">
+        content="YOOO: Vision-Driven Robotic Cable Insertion for Automotive Wiring Harness Assembly using YOLOv11">
+  <meta name="keywords" content="YOOO, Cable Insertion, YOLOv11, Computer Vision, Robotics, Automotive, Wiring Harness">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cable Orienter</title>
-  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  </script>
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true}, "HTML-CSS": {minScaleAdjust: 100} });
-  </script>
   
-  <!-- Google Analytics (optional) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
+  <meta property="og:title" content="YOOO: You Only Orient Once">
+  <meta property="og:description" content="Vision-Driven Robotic Cable Insertion for Automotive Wiring Harness Assembly">
+  <meta property="og:image" content="https://am-robo-projects.github.io/WiringHarnessChallenge_2.0/static/images/favicon.svg">
+  <meta property="og:url" content="https://am-robo-projects.github.io/WiringHarnessChallenge_2.0/">
+  <meta name="twitter:card" content="summary_large_image">
   
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <link rel="canonical" href="https://am-robo-projects.github.io/WiringHarnessChallenge_2.0/">
+  <meta name="theme-color" content="#667eea">
+  <title>YOOO: You Only Orient Once</title>
 
-  <!-- CDN links for CSS libraries -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.5/dist/css/bulma-slider.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.png">
-
-  <!-- CDN links for JavaScript libraries -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="./static/css/scroll.css">
+  <link rel="stylesheet" href="./static/css/pipeline.css">
+  <link rel="stylesheet" href="./static/css/image-modal.css">
+  <link rel="icon" href="./static/images/favicon.svg">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.5/dist/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script src="./static/js/scroll.js"></script>
+  <script src="./static/js/image-modal.js"></script>
 </head>
 <body>
 
@@ -50,41 +38,20 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">
-            <img src="static/images/favicon.png" alt="Cable Orienter" class="h-[1em] inline align-[-0.1em]" style="width: 50px;">
-            Cable Orienter: Precise Cable Pitch and Bending Detection for Robotic Applications
+            You Only Orient Once (YOOO): Vision-Driven Robotic Cable Insertion
           </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="#">Author Name</a><sup>1</sup></span>
+              <a href="#">Abdelrahman Mahmoud</a></span>,
             <span class="author-block">
-              <a href="#">Co-Author Name</a><sup>1</sup></span>
+              <a href="#">Rodolfo Verde</a></span>,
+            <span class="author-block">
+              <a href="#">Volker Willert</a></span>,
+            <span class="author-block">
+              <a href="#">Tobias Kaupp</a></span>
           </div>
-
-          <div class="is-size-5 publication-authors">
-            <div class="author-block"><sup>1</sup>Robotics Lab, University Name</div>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
+          
+          <!-- Paper links removed as paper not published yet -->
 
               <!-- Code Link. -->
               <span class="link-block">
@@ -96,16 +63,7 @@
                   <span>Code</span>
                   </a>
               </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="#" 
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Dataset</span>
-                  </a>
-              </span>
+              <!-- Dataset link removed as dataset won't be published -->
             </div>
           </div>
         </div>
@@ -114,67 +72,31 @@
   </div>
 </section>
 
-<div style="text-align: center;">
-  <img src="./static/images/intro.png" alt="System Introduction" style="width: 90%;">
-</div>
+<!-- SVG removed - using pipeline image from PDF instead -->
 
 <!-- Teaser video section -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <center>
-      <video id="teaser" autoplay controls muted loop playsinline width="85%" height="85%">
-        <source src="./static/videos/demo.mp4" type="video/mp4">
-      </video>
-    </center>
-      <h3 class="subtitle has-text-centered">
-        Cable Orienter in action - detecting bending and pitch angles
-      </h3>
-    </div>
-  </div>
-</section>
+<!-- Video section removed as it had no content -->
 
 <section class="section">
   <div class="container is-max-desktop">
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-3">Overview</h2>
         <div class="content has-text-justified">
           <p>
-            Precise cable orientation detection is crucial for robotic applications in manufacturing and assembly tasks.
-            This project introduces Cable Orienter, a system that accurately determines the bending and pitch angles of cables
-            using computer vision and deep learning techniques. By employing YOLO-based models for keypoint detection and
-            segmentation, our approach provides reliable measurements that can guide robotic manipulators in handling cables
-            with varying shapes and orientations. The Cable Orienter system supports different cable types and demonstrates
-            robust performance across various conditions, making it suitable for industrial applications where precise
-            cable positioning is essential.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column">
-        <h2 class="title is-3">Introduction</h2>
-        <div class="content has-text-justified">
-          <p></p>
-            Cable handling and manipulation present significant challenges in robotic automation. While robots excel at handling rigid objects, flexible cables require specialized approaches. Our Cable Orienter system addresses this challenge by providing accurate detection of cable orientation parameters, specifically focusing on bending and pitch angles.
+            Automotive wiring harness assembly remains predominantly manual despite increasing automation in manufacturing. 
+            YOOO (You Only Orient Once) addresses this challenge by introducing an advanced vision-driven pipeline that 
+            integrates collaborative robotics and computer vision for precise cable insertion into connector housings.
           </p>
           <p>
-            The system uses advanced computer vision techniques with YOLO (You Only Look Once) models trained for two main tasks:
+            Our system leverages YOLOv11 models for simultaneous keypoint detection and segmentation to accurately determine 
+            cable orientation without requiring precise extrinsic camera calibration. This enables rapid deployment with 
+            minimal setup time (~1 minute) while maintaining high precision for sub-millimeter insertion accuracy.
           </p>
-          <ul>
-            <li><b>Keypoint Detection</b>: Identifies critical points along the cable to determine pitch orientation</li>
-            <li><b>Segmentation</b>: Precisely outlines the cable shape to calculate bending angles</li>
-          </ul>
           <p>
-            By combining these approaches, Cable Orienter enables robotic systems to handle cables with greater precision, supporting applications in manufacturing, assembly, and maintenance operations where cable routing and placement are critical.
+            <strong>Key Results:</strong> 94% insertion success rate under stable conditions, 12.75 seconds average insertion time per terminal, 
+            and robust performance across varying cable orientations and lighting conditions.
           </p>
         </div>
       </div>
@@ -186,202 +108,142 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column">
-        <h2 class="title is-3">System Architecture</h2>
-        <div class="content has-text-justified">
-          <img src="./static/images/architecture.png" alt="System Architecture" style="width: 90%;">
-          <p>
-            The Cable Orienter system employs a modular architecture designed for flexibility and performance:
-          </p>
-          <ol>
-            <li><b>Input Processing</b>: The system accepts RGB images of cables as input, which can be from various sources including cameras mounted on robotic systems.</li>
-            <li><b>YOLO Models</b>: Two specialized YOLO models process the images:
-              <ul>
-                <li>A keypoint detection model identifies specific points along the cable</li>
-                <li>A segmentation model precisely outlines the cable shape</li>
-              </ul>
-            </li>
-            <li><b>Angle Calculation</b>: Using the outputs from the YOLO models, the system calculates:
-              <ul>
-                <li>Bending angles from the segmentation masks</li>
-                <li>Pitch angles from the detected keypoints</li>
-              </ul>
-            </li>
-            <li><b>Output</b>: The calculated angles are provided to guide robotic manipulators in handling the cables with precision.</li>
-          </ol>
-          <p>
-            The system supports multiple cable types, allowing for specialized detection based on cable characteristics such as color and structure.
-          </p>
+        <h2 class="title is-3">Methodology</h2>
+        
+        <!-- Angle Detection Overview -->
+        <!-- SVG removed - using detailed PNG images of pitch and roll angle detection below -->
+        
+        <!-- Pipeline Images from PDF -->
+        <div class="columns" style="margin-top: 2rem;">
+          <div class="column">
+            <img src="./static/images/pitch_angle_pipeline.png" alt="Pitch Angle Pipeline" class="clickable-image" style="width: 100%; border: 1px solid #ddd; border-radius: 8px;">
+            <p class="image-caption">Pitch angle estimation pipeline</p>
+          </div>
+          <div class="column">
+            <img src="./static/images/roll_angle_pipeline.png" alt="Roll Angle Pipeline" class="clickable-image" style="width: 100%; border: 1px solid #ddd; border-radius: 8px;">
+            <p class="image-caption">Roll angle detection pipeline</p>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column">
-        <h2 class="title is-3">Methods</h2>
+        
         <div class="content has-text-justified">
-          <h3>Bending Angle Detection</h3>
-          <img src="./static/images/bending.png" alt="Bending Angle Detection" style="width: 80%;">
           <p>
-            To determine cable bending, the system uses segmentation results to identify the cable shape. The process involves:
-          </p>
-          <ol>
-            <li>Extracting a precise mask of the cable using the YOLO segmentation model</li>
-            <li>Applying contour approximation to find the four corners of the cable shape</li>
-            <li>Calculating angles between these corners to determine the overall bending</li>
-          </ol>
-          <p>
-            The system can calculate both minimum and maximum bending angles, providing a comprehensive understanding of the cable's shape.
-          </p>
-
-          <h3>Pitch Angle Detection</h3>
-          <img src="./static/images/pitch.png" alt="Pitch Angle Detection" style="width: 80%;">
-          <p>
-            For pitch detection, the system relies on keypoint identification:
-          </p>
-          <ol>
-            <li>The keypoint detection model identifies specific points along the cable</li>
-            <li>Using the positions of these keypoints, the system calculates the angle between them and the horizontal axis</li>
-            <li>This angle is then used to determine the pitch orientation of the cable</li>
-          </ol>
-          <p>
-            The approach allows for precise measurement of cable orientation in three-dimensional space, which is crucial for robotic manipulation tasks.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column">
-        <h2 class="title is-3">Results</h2>
-        <div class="content has-text-justified">
-          <img src="./static/images/results.png" alt="Results" style="width: 90%;">
-          <p>
-            Our Cable Orienter system demonstrates high accuracy in detecting both bending and pitch angles across various cable types. The system was evaluated using a dataset of cable images in different orientations and configurations.
+            The YOOO system employs two specialized YOLOv11 models working in parallel to achieve precise cable orientation estimation 
+            without requiring complex extrinsic camera calibration.
           </p>
           
-          <!-- Example results - wrapped in a table-container for mobile responsiveness -->
-          <div class="columns is-centered">
-            <div class="column is-half">
-              <div class="table-container">
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                  <thead>
-                    <tr>
-                      <th>Cable Type</th>
-                      <th>Bending Accuracy</th>
-                      <th>Pitch Accuracy</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Yellow</td>
-                      <td>96.2%</td>
-                      <td>94.5%</td>
-                    </tr>
-                    <tr>
-                      <td>Black</td>
-                      <td>95.8%</td>
-                      <td>93.2%</td>
-                    </tr>
-                    <tr>
-                      <td>Mixed</td>
-                      <td>94.3%</td>
-                      <td>92.8%</td>
-                    </tr>
-                    <tr>
-                      <td>Multi-core</td>
-                      <td>93.9%</td>
-                      <td>91.5%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <h4 class="title is-5 pitch-title">🎯 Pitch Correction (YOLOv11-pose)</h4>
+          <p>
+            Our keypoint detection model identifies five critical points on the cable terminal: Left Midpoint, Center, Right Midpoint, 
+            Top, and Bottom. The pitch angle is calculated by connecting these midpoints and measuring the slope relative to the 
+            horizontal reference. This approach provides ~10° tolerance, ensuring robust insertion even with minor detection variations.
+          </p>
+          
+          <h4 class="title is-5 roll-title">🔄 Roll Correction (YOLOv11-seg)</h4>
+          <p>
+            The segmentation model precisely outlines the terminal shape from a side view. The contour is approximated using four 
+            straight lines forming a rectangle, and the roll angle is computed from the horizontal edge gradients. A weighted average 
+            across multiple images improves accuracy, with smaller angles receiving higher weights to minimize outlier influence.
+          </p>
+          
+          <h4 class="title is-5 deployment-title">⚡ Fast Deployment</h4>
+          <p>
+            Unlike traditional methods requiring hours of precise camera calibration, YOOO needs only 1 minute to ensure the terminal 
+            is within the camera's field of view. This enables rapid deployment in dynamic industrial environments with frequently 
+            changing layouts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">System Hardware & Setup</h2>
+        <div class="content has-text-justified">
+          <!-- Use extracted PDF image -->
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="./static/images/system_hardware_setup.png" alt="System Hardware Configuration" class="clickable-image" style="width: 80%; max-width: 600px; border: 1px solid #ddd; border-radius: 8px;">
+            <p class="image-caption">UR5e robotic arm with dual orthogonal camera setup (FLIR Firefly and IDS camera)</p>
           </div>
           
           <p>
-            Key performance metrics include:
-          </p>
-          <ul>
-            <li>Bending angle detection accuracy: ~95%</li>
-            <li>Pitch angle detection accuracy: ~93%</li>
-            <li>Processing time: 80-120ms per image on standard hardware</li>
-          </ul>
-          <p>
-            The system shows robust performance even with varying lighting conditions and background complexities, making it suitable for real-world industrial applications.
-          </p>
-          
-          <p>
-            We also conducted ablation studies to analyze the contribution of different components:
-          </p>
-          <ul>
-            <li>Using both minimum and maximum bending angles provides more comprehensive orientation information</li>
-            <li>The specialized models for different cable types improve accuracy by 12-15% compared to generic models</li>
-          </ul>
-          
-          <p>
-            Future work will focus on extending the system to handle a wider variety of cable types and incorporating real-time tracking capabilities.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column">
-        <h2 class="title is-3">Key Applications</h2>
-        <div class="content has-text-justified">
-          <p>
-            The Cable Orienter system enables several important applications in robotics and manufacturing:
+            The YOOO system utilizes a collaborative UR5e robotic arm equipped with a Robotiq gripper and dual orthogonal camera 
+            configuration. This setup enables simultaneous front and side view analysis of cable terminals for comprehensive 
+            orientation detection.
           </p>
           
           <div class="columns">
             <div class="column">
-              <div class="box">
-                <h4 class="title is-4">Automated Cable Assembly</h4>
-                <p>Enables robots to precisely handle and position cables during assembly operations, reducing manual intervention and increasing efficiency.</p>
-              </div>
+              <h4 class="title is-5">🔧 Key Components</h4>
+              <ul>
+                <li><strong>UR5e Collaborative Robot:</strong> 6-DOF robotic arm for precise manipulation</li>
+                <li><strong>Dual Camera System:</strong> FLIR Firefly and IDS cameras for orthogonal views</li>
+                <li><strong>Force Feedback:</strong> Integrated sensors for insertion verification</li>
+                <li><strong>Connector Fixtures:</strong> Optimized layout to minimize travel distances</li>
+              </ul>
             </div>
             <div class="column">
-              <div class="box">
-                <h4 class="title is-4">Quality Control</h4>
-                <p>Provides objective measurements for cable orientation, helping ensure proper cable routing and connections in complex systems.</p>
-              </div>
+              <h4 class="title is-5">⚙️ System Requirements</h4>
+              <ul>
+                <li>Terminal visibility in both camera views</li>
+                <li>Aligned planar surfaces to prevent perspective distortion</li>
+                <li>Horizontal alignment with image axes for accurate angle compensation</li>
+              </ul>
             </div>
           </div>
+          <!-- Include YOOO pipeline image from PDF -->
+          <div style="text-align: center; margin: 2rem 0;">
+            <img src="./static/images/yooo_complete_pipeline.png" alt="YOOO Pipeline Overview" class="pipeline-image clickable-image">
+            <p class="pipeline-caption">Complete YOOO pipeline architecture</p>
+          </div>
+          
+          <h4 class="title is-5">🔄 Key Process Features</h4>
+          <ul>
+            <li><strong>Cable Handling & Vision Processing:</strong> Precise grasping followed by YOLOv11-based detection</li>
+            <li><strong>Angle Correction:</strong> Pitch and roll adjustment based on real-time measurements</li>
+            <li><strong>Insertion with Verification:</strong> Force-feedback guided insertion with error recovery</li>
+            <li><strong>Optimization:</strong> Parallel processing and strategic placement minimize cycle time</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Conclusion & Future Work</h2>
+        <div class="content has-text-justified">
+          <p>
+            YOOO represents a significant advancement in automated cable assembly for automotive manufacturing. 
+            By combining state-of-the-art computer vision with collaborative robotics, the system addresses key 
+            challenges in cable flexibility, orientation accuracy, and insertion precision.
+          </p>
           
           <div class="columns">
             <div class="column">
-              <div class="box">
-                <h4 class="title is-4">Maintenance Robotics</h4>
-                <p>Assists robots in identifying and manipulating cables during maintenance operations in hard-to-reach or hazardous environments.</p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="box">
-                <h4 class="title is-4">Training Systems</h4>
-                <p>Offers real-time feedback for training human operators in proper cable handling and installation techniques.</p>
+              <div class="box future-box">
+                <h4 class="title is-6 future-title">🚀 Future Directions</h4>
+                <ul style="text-align: left;">
+                  <li>Vision-language model integration</li>
+                  <li>Unseen connector generalization</li>
+                  <li>Natural language command interface</li>
+                  <li>Multi-cable simultaneous handling</li>
+                  <li>Enhanced lighting robustness</li>
+                </ul>
               </div>
             </div>
           </div>
           
-          <div class="columns is-centered">
-            <div class="column is-half">
-              <div class="box">
-                <h4 class="title is-4">Try our system!</h4>
-                <p>Visit our <a href="https://github.com/AM-Robo-Projects/WiringHarnessChallenge_2.0">GitHub repository</a> to access the complete Cable Orienter system and documentation.</p>
-              </div>
-            </div>
+          <div class="notification is-info" style="margin-top: 1rem;">
+            <strong>Impact:</strong> This work bridges the gap between manual dexterity and robotic precision in cable assembly, 
+            potentially enabling higher automation levels in the automotive wiring harness industry where currently only 
+            ~10% of processes are automated.
           </div>
         </div>
       </div>
@@ -389,31 +251,83 @@
   </div>
 </section>
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h3 class="title">Citation</h3>
-    <pre><code>@article{cableorienter2024,
-    title={Cable Orienter: Precise Cable Pitch and Bending Detection for Robotic Applications},
-    author={Author Name and Co-Author Name},
-    journal={arXiv preprint arXiv:XXXX.XXXXX},
-    year={2024}
-}</code></pre>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Experimental Results</h2>
+        
+        <div class="content has-text-justified">
+          <p>
+            YOOO was evaluated across 50 trials under both stable and unstable lighting conditions to assess real-world 
+            robustness. The system demonstrates exceptional performance with minimal calibration requirements. During testing,
+            four terminals were inserted in a total of 51 seconds, resulting in the average time of 12.75 seconds per terminal.
+          </p>
+          
+          <div class="columns">
+            <div class="column">
+              <div class="box metric-card insertion-card">
+                <h4 class="title is-5 metric-title">🎯 Insertion Success</h4>
+                <p class="title is-2 metric-value">94%</p>
+                <p>Under stable lighting conditions</p>
+                <p class="metric-note">81.6% under unstable conditions</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="box metric-card detection-card">
+                <h4 class="title is-5 metric-title">👁️ Detection Rate</h4>
+                <p class="title is-2 metric-value">100%</p>
+                <p>Pitch & roll angle detection</p>
+                <p class="metric-note">92% under challenging lighting</p>
+              </div>
+            </div>
+            
+            <div class="column">
+              <div class="box metric-card speed-card">
+                <h4 class="title is-5 metric-title">⚡ Speed</h4>
+                <p class="title is-2 metric-value">12.75s</p>
+                <p>Average insertion time per terminal</p>
+                <p class="metric-note">Including grasp & measurement</p>
+              </div>
+            </div>
+          </div>
+          
+          <h4 class="title is-5">🔍 Key Findings</h4>
+          <ul>
+            <li><strong>Rapid Deployment:</strong> Only 1 minute calibration time vs hours for traditional methods</li>
+            <li><strong>Lighting Robustness:</strong> System maintains 81.6% success rate even under unstable lighting</li>
+            <li><strong>Material Sensitivity:</strong> Metal grippers significantly outperform plastic ones</li>
+            <li><strong>Angle Tolerance:</strong> ~10° pitch detection tolerance prevents insertion failures</li>
+            <li><strong>Force Feedback:</strong> Enables error recovery and insertion verification</li>
+          </ul>
+             <!-- Pipeline Images moved to methodology section -->
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- Removed GitHub CTA section as it's redundant with other GitHub links -->
+
+<!-- Citation section removed as paper has not been published yet -->
 
 <footer class="footer">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
-          <p>
-            This project is part of the Wiring Harness Challenge 2.0. Website design template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>.
+          <p class="has-text-centered">
+            Website template based on <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>.</small>
           </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- Back to top button inserted by scroll.js -->
 
 </body>
 </html>

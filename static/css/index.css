@@ -4,40 +4,16 @@ body {
 }
 
 .publication-title {
-  font-family: 'Google Sans', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: 1.5rem !important;
 }
 
 .publication-authors {
-  font-family: 'Google Sans', sans-serif;
-}
-
-.publication-banner {
-  max-height: 300px;
-  width: 100%;
-  object-fit: cover;
-}
-
-.publication-header {
-  max-height: 400px;
-  width: auto;
-  object-fit: contain;
-}
-
-.publication-video {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.publication-video iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  margin-bottom: 0.75rem;
 }
 
 .publication-body img {
@@ -46,51 +22,8 @@ body {
   margin: 1rem 0;
 }
 
-.results-carousel {
-  overflow: hidden;
-}
-
-.results-carousel .item {
-  margin: 10px;
-  overflow: hidden;
-  padding: 20px;
-  font-size: 0;
-}
-
-.results-carousel video {
-  margin: 0;
-}
-
-.results-carousel .item img {
-  margin: 0;
-}
-
-.results-carousel .item {
-  max-height: 200px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.results-carousel .item img {
-  height: auto;
-  width: auto;
-  max-height: 100%;
-  max-width: 100%;
-}
-
-.carousel-arrow-left:hover, .carousel-arrow-right:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
 .hero-body {
-  padding-top: 2rem;
-  padding-bottom: 1rem;
-}
-
-.hero.teaser {
-  background-color: #f8f8f8;
+  padding: 3rem 1.5rem 2rem;
 }
 
 .hero.is-small .hero-body {
@@ -99,8 +32,22 @@ body {
 }
 
 .footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 2rem 0;
   margin-top: 4rem;
-  padding: 2rem 1.5rem 2rem;
+}
+
+.footer .content p {
+  margin-bottom: 0;
+}
+
+.footer a {
+  color: #3498db;
+}
+
+.footer a:hover {
+  color: #5dade2;
 }
 
 .section.article {
@@ -127,6 +74,11 @@ body {
 
 .content p {
   text-align: justify;
+  margin-bottom: 1.25rem;
+}
+
+.content ul, .content ol {
+  margin-bottom: 1.5rem;
 }
 
 .content h2 {
@@ -177,24 +129,18 @@ pre {
 }
 
 .section {
-  padding: 2rem 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
-@media screen and (max-width: 768px) {
-  .section {
-    padding: 1.5rem 1rem;
-  }
-  
-  .hero-body {
-    padding: 1.5rem 1rem;
-  }
+.section .title {
+  margin-bottom: 2rem;
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #121212;
-    color: #e0e0e0;
+    color: #ffffff; /* Improved from #e0e0e0 for better contrast */
   }
   
   .title, .subtitle {
@@ -205,23 +151,33 @@ pre {
     color: #ffffff;
   }
   
+  /* Ensure strong and em elements have high contrast in dark mode */
+  strong, b {
+    color: #ffffff;
+    font-weight: 700; /* Ensure bold text is actually bold */
+  }
+  
+  em, i {
+    color: #ffffff;
+  }
+  
   .box {
     background-color: #252525;
-    color: #e0e0e0;
+    color: #ffffff; /* Improved from #e0e0e0 for better contrast */
   }
   
   .footer {
     background-color: #1a1a1a;
-    color: #cccccc;
+    color: #ffffff; /* Improved from #cccccc for better contrast */
   }
   
   table.table {
     background-color: #252525;
-    color: #ffffff; /* Changed from #e0e0e0 to make text more visible */
+    color: #ffffff;
   }
   
   table.table th {
-    color: #ffffff; /* Ensure headers are also bright white */
+    color: #ffffff;
   }
   
   table.table.is-striped tbody tr:not(.is-selected):nth-child(even) {
@@ -230,23 +186,96 @@ pre {
   
   pre {
     background-color: #2d2d2d;
-    color: #e0e0e0;
+    color: #ffffff; /* Improved from #e0e0e0 for better contrast */
   }
   
-  .hero.teaser {
-    background-color: #1a1a1a;
+  code {
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 2px 4px;
+  }
+  
+  pre code {
+    background-color: transparent;
   }
 
   a {
     color: #61dafb;
   }
 
+  blockquote {
+    background-color: #252525;
+    border-left: 5px solid #61dafb;
+    color: #ffffff;
+  }
+
   a:hover {
     color: #a5e9ff;
   }
+
+  p, li, span, div:not(.has-background), td, th, label, figcaption {
+    color: #ffffff;
+  }
+
+  ::selection {
+    background-color: #61dafb;
+    color: #000000;
+  }
+
+  .readme-section {
+    border-color: #30363d;
+    color: #c9d1d9;
+  }
+  
+  .readme-section h3 {
+    color: #c9d1d9;
+    border-bottom-color: #21262d;
+  }
+  
+  .readme-section h4 {
+    color: #c9d1d9;
+  }
+  
+  .readme-section p {
+    color: #c9d1d9;
+  }
+
+  .readme-section a {
+    color: #58a6ff;
+  }
+
+  .readme-section a:hover {
+    color: #79c0ff;
+  }
+  
+  .code-block pre {
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .code-block code {
+    color: #c9d1d9;
+  }
+
+  .copy-button {
+    color: #7d8590;
+  }
+
+  .copy-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #c9d1d9;
+  }
+
+  .copy-button:active {
+    transform: scale(0.95);
+  }
+
+  .github-link {
+    color: #58a6ff;
+  }
 }
 
-/* Better mobile layout for publication links */
 @media screen and (max-width: 600px) {
   .publication-links {
     display: flex;
@@ -258,10 +287,20 @@ pre {
     margin: 0.3rem;
   }
 }
-
-/* Better image handling on small screens */
 @media screen and (max-width: 768px) {
   .section .content img {
+    width: 100%;
+  }
+  
+  .publication-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .columns .column {
+    margin-bottom: 1rem;
+  }
+  
+  .pipeline-diagram {
     width: 100%;
   }
 }
@@ -318,3 +357,239 @@ pre {
 .table.is-hoverable tbody tr {
   transition: none !important;
 }
+
+/* YOOO Paper Website Custom Styles */
+
+/* Title styling with gradient */
+.publication-title {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Improved spacing for sections */
+.section {
+  padding: 3rem 1.5rem;
+}
+
+.section .title {
+  margin-bottom: 2rem;
+}
+
+/* Better content spacing */
+.content p {
+  margin-bottom: 1.25rem;
+}
+
+.content ul, .content ol {
+  margin-bottom: 1.5rem;
+}
+
+/* Metric cards with hover effects */
+.metric-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Pipeline diagrams styling */
+.pipeline-diagram {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better image containers */
+.image-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Improved columns spacing */
+.columns {
+  margin-bottom: 2rem;
+}
+
+.columns:last-child {
+  margin-bottom: 0;
+}
+
+/* Better box styling */
+.box {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+/* Hero section improvements */
+.hero-body {
+  padding: 3rem 1.5rem 2rem;
+}
+
+/* Video section improvements - removed unused teaser styles */
+
+/* Publication links removed as paper not published yet */
+
+/* Author information spacing */
+.publication-authors {
+  margin-bottom: 0.75rem;
+}
+
+/* Abstract section improvements */
+.content.has-text-justified {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+/* Methodology section improvements */
+.title.is-5 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Results section improvements */
+.notification {
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+/* Image caption styling */
+.image-caption {
+  font-style: italic;
+  color: #666;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Colored section titles */
+.pitch-title {
+  color: #e74c3c;
+}
+
+.roll-title {
+  color: #9b59b6;
+}
+
+.deployment-title {
+  color: #f39c12;
+}
+
+.future-title {
+  color: #3498db;
+}
+
+/* Future directions box */
+.future-box {
+  border-left: 4px solid #3498db;
+}
+
+/* Metric cards styling */
+.metric-card {
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.insertion-card {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.detection-card {
+  background: linear-gradient(135deg, #3498db, #5dade2);
+}
+
+.speed-card {
+  background: linear-gradient(135deg, #e74c3c, #ec7063);
+}
+
+.metric-title {
+  color: white !important;
+}
+
+.metric-value {
+  color: white !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.metric-note {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  .image-caption {
+    color: #aaa;
+  }
+  
+  /* Make colored titles brighter in dark mode */
+  .pitch-title {
+    color: #ff6b6b;
+  }
+  
+  .roll-title {
+    color: #d183ff;
+  }
+  
+  .deployment-title {
+    color: #ffb74d;
+  }
+  
+  .future-title {
+    color: #4dabff;
+  }
+  
+  .future-box {
+    border-left: 4px solid #4dabff;
+  }
+}
+
+/* GitHub CTA styling */
+.github-cta {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1.1rem;
+}
+
+.github-cta .fa-github {
+  font-size: 1.2em;
+  vertical-align: middle;
+  margin-right: 0.3em;
+}
+
+.github-link {
+  color: #0366d6;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.github-link:hover {
+  border-bottom-color: currentColor;
+}
+
+
