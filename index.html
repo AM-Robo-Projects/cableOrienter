@@ -157,100 +157,34 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column">
-        <h2 class="title is-3">System Hardware & Setup</h2>
-        <div class="content has-text-justified">
-          <!-- Use extracted PDF image -->
-          <div style="text-align: center; margin: 2rem 0;">
-            <img src="./static/images/system_hardware_setup.png" alt="System Hardware Configuration" class="clickable-image" style="width: 80%; max-width: 600px; border: 1px solid #ddd; border-radius: 8px;">
-            <p class="image-caption">UR5e robotic arm with dual orthogonal camera setup (FLIR Firefly and IDS camera)</p>
-          </div>
-          
-          <p>
-            The YOOO system utilizes a collaborative UR5e robotic arm equipped with a Robotiq gripper and dual orthogonal camera 
-            configuration. This setup enables simultaneous front and side view analysis of cable terminals for comprehensive 
-            orientation detection.
-          </p>
-          
-          <div class="columns">
-            <div class="column">
-              <h4 class="title is-5">🔧 Key Components</h4>
-              <ul>
-                <li><strong>UR5e Collaborative Robot:</strong> 6-DOF robotic arm for precise manipulation</li>
-                <li><strong>Dual Camera System:</strong> FLIR Firefly and IDS cameras for orthogonal views</li>
-                <li><strong>Force Feedback:</strong> Integrated sensors for insertion verification</li>
-                <li><strong>Connector Fixtures:</strong> Optimized layout to minimize travel distances</li>
-              </ul>
-            </div>
-            <div class="column">
-              <h4 class="title is-5">⚙️ System Requirements</h4>
-              <ul>
-                <li>Terminal visibility in both camera views</li>
-                <li>Aligned planar surfaces to prevent perspective distortion</li>
-                <li>Horizontal alignment with image axes for accurate angle compensation</li>
-              </ul>
-            </div>
-          </div>
-          <!-- Include YOOO pipeline image from PDF -->
-          <div style="text-align: center; margin: 2rem 0;">
-            <img src="./static/images/yooo_complete_pipeline.png" alt="YOOO Pipeline Overview" class="pipeline-image clickable-image">
-            <p class="pipeline-caption">Complete YOOO pipeline architecture</p>
-          </div>
-          
-          <h4 class="title is-5">🔄 Key Process Features</h4>
-          <ul>
-            <li><strong>Cable Handling & Vision Processing:</strong> Precise grasping followed by YOLOv11-based detection</li>
-            <li><strong>Angle Correction:</strong> Pitch and roll adjustment based on real-time measurements</li>
-            <li><strong>Insertion with Verification:</strong> Force-feedback guided insertion with error recovery</li>
-            <li><strong>Optimization:</strong> Parallel processing and strategic placement minimize cycle time</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
+
+
+
 
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column">
-        <h2 class="title is-3">Conclusion & Future Work</h2>
+        <h2 class="title is-3">Demo</h2>
         <div class="content has-text-justified">
           <p>
-            YOOO represents a significant advancement in automated cable assembly for automotive manufacturing. 
-            By combining state-of-the-art computer vision with collaborative robotics, the system addresses key 
-            challenges in cable flexibility, orientation accuracy, and insertion precision.
+            See the YOOO system in action with our metal gripper demonstration. The video shows the complete pipeline 
+            from cable grasping to orientation detection and precision insertion into the connector housing.
           </p>
           
-          <div class="columns">
-            <div class="column">
-              <div class="box future-box">
-                <h4 class="title is-6 future-title">🚀 Future Directions</h4>
-                <ul style="text-align: left;">
-                  <li>Vision-language model integration</li>
-                  <li>Unseen connector generalization</li>
-                  <li>Natural language command interface</li>
-                  <li>Multi-cable simultaneous handling</li>
-                  <li>Enhanced lighting robustness</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          <div class="notification is-info" style="margin-top: 1rem;">
-            <strong>Impact:</strong> This work bridges the gap between manual dexterity and robotic precision in cable assembly, 
-            potentially enabling higher automation levels in the automotive wiring harness industry where currently only 
-            ~10% of processes are automated.
+          <div style="text-align: center; margin: 2rem 0;">
+            <video controls muted poster="./static/images/video-poster.svg" style="width: 60%; max-width: 500px; border-radius: 8px;">
+              <source src="./static/videos/insertions.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <p class="image-caption">YOOO demo: Cable insertion with metal gripper</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 
 <section class="section">
   <div class="container is-max-desktop">
