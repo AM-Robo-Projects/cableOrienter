@@ -1,68 +1,56 @@
-# Cable Orienter Project
+# YOOO: You Only Orient Once - Cable Orientation Demo
 
-A computer vision system for detecting cable orientation parameters (pitch and bending) using YOLO models.
+A vision-driven approach for precise cable orientation detection using YOLOv11 models.
 
-## Project Overview
+## Installation
 
-This project provides a utility for measuring cable orientation to assist robotic manipulation tasks. It uses:
-
-- YOLO models for keypoint detection and segmentation
-- Computer vision techniques for angle calculation
-- Support for various cable types
-
-## Setup & Installation
-
-1. Clone this repository:
-   ```
-   git clone https://github.com/AM-Robo-Projects/WiringHarnessChallenge_2.0.git
-   cd WiringHarnessChallenge_2.0
-   ```
-
-2. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-## Usage
-
-Run the main script to see a demonstration:
-
-```
-python main.py
+```bash
+pip install -r requirements.txt
 ```
 
-For integrating into your own project:
+## Quick Start
+
+Run the demo with image paths:
+
+```bash
+python YOOODemo.py --pitch_image ./demo_pics/kp0.jpg --roll_image ./demo_pics/seg0.jpg --display
+```
+
+Save results to output directory:
+
+```bash
+python YOOODemo.py --roll_image ./new_pics/seg_new1.jpg --output_dir output
+```
+
+## Key Command Line Options
+
+- `--pitch_image`: Front view image for pitch angle detection
+- `--roll_image`: Side view image for roll angle detection
+- `--output_dir`: Directory to save visualization results
+- `--display`: Enable visual display of results (flag with no value)
+- `--roll_angles`: Number of roll angle simulations to average (default: 8)
+
+## CableOrienter API Example
 
 ```python
-from CableOrienter import CableOrienter, CableType
+from CableOrienter import CableOrienter
+import cv2
 
-# Initialize the orienter
-cable_orienter = CableOrienter()
+# Initialize
+orienter = CableOrienter(
+    keypoint_model_path='./models/yellow_kp.pt',
+    segmentation_model_path='./models/yellow_seg.pt'
+)
 
-# Detect bending angle
-bending_angle = cable_orienter.determine_bending(image, CableType.YELLOW)
+# Load images
+pitch_image = cv2.imread('path/to/pitch_image.jpg')
+roll_image = cv2.imread('path/to/roll_image.jpg')
 
-# Detect pitch angle
-pitch_angle = cable_orienter.determine_pitch(image, CableType.YELLOW)
+# Get angles
+pitch_angle = orienter.determine_pitch_angle(pitch_image)  # in radians
+roll_angle = orienter.determine_roll_angle(roll_image)     # in radians
+
+# Get detection data for visualization
+pitch_data = orienter.get_detection_data(pitch_image, 'kp')
+roll_data = orienter.get_detection_data(roll_image, 'seg')
 ```
-
-## Project Website
-
-Visit our [project website](https://AM-Robo-Projects.github.io/WiringHarnessChallenge_2.0/) for additional documentation and examples.
-
-## Citation
-
-If you use this project in your research, please cite:
-
-```
-@article{cableorienter2024,
-    title={Cable Orienter: Precise Cable Pitch and Bending Detection for Robotic Applications},
-    author={AM-Robo-Projects},
-    journal={arXiv preprint arXiv:XXXX.XXXXX},
-    year={2024}
-}
-```
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
