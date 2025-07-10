@@ -58,3 +58,8 @@ roll_angle = orienter.determine_roll_angle(roll_image)     # in radians
 pitch_data = orienter.get_detection_data(pitch_image, 'kp')
 roll_data = orienter.get_detection_data(roll_image, 'seg')
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+

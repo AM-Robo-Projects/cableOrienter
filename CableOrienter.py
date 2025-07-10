@@ -1,3 +1,12 @@
+# MIT License
+
+# Copyright (c) 2025 Abdelrahman Mahmoud and Rodolfo Verde, Technology Transfer Center Kitzingen 
+
+# See LICENSE file in the root of this repository.
+
+
+
+
 import math
 from enum import Enum
 from typing import Tuple, List
