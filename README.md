@@ -4,7 +4,7 @@ A vision-driven approach for precise cable orientation detection using YOLOv11 m
 
 ## Project Website
 
-For detailed information about the research, methodology, and results, visit our [project website](https://am-robo-projects.github.io/WiringHarnessChallenge_2.0/).
+For detailed information about the research, methodology, and results, visit our [project website](https://am-robo-projects.github.io/cableOrienter/).
 
 ## Installation
 
